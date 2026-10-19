@@ -215,6 +215,11 @@ section{padding:78px 0;position:relative}
 .repo .rk{font-family:var(--mono);font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;padding:3px 8px;border-radius:6px;margin-left:auto;flex:none}
 .rk.own{background:color-mix(in srgb,var(--amber) 18%,transparent);color:var(--amber)}
 .rk.fork{background:color-mix(in srgb,var(--cyan) 18%,transparent);color:var(--cyan)}
+.rk.research{background:color-mix(in srgb,var(--amber) 18%,transparent);color:var(--amber)}
+.rk.collab{background:color-mix(in srgb,#8b9cff 22%,transparent);color:#8b9cff}
+.rk.app{background:color-mix(in srgb,var(--ink-dim) 20%,transparent);color:var(--ink-soft)}
+.repo.priv{cursor:default}
+.priv-tag{color:var(--ink-dim)}
 .repo p.rd{font-size:.86rem;color:var(--ink-soft);line-height:1.55;flex:1}
 .repo .rfork{font-family:var(--mono);font-size:.72rem;color:var(--ink-dim);margin-top:8px}
 .repo .rfork b{color:var(--ink-soft)}
@@ -418,7 +423,7 @@ footer{border-top:1px solid var(--line-soft);background:var(--panel-2);padding:6
     <div class="stat"><div class="num" data-count="10">0</div><div class="lbl">Years Research</div></div>
     <div class="stat"><div class="num" data-count="18" data-suffix="+">0</div><div class="lbl">Publications</div></div>
     <div class="stat"><div class="num" data-count="1">0</div><div class="lbl">Patent Pending</div></div>
-    <div class="stat"><div class="num" data-count="13">0</div><div class="lbl">Code Repos</div></div>
+    <div class="stat"><div class="num" data-count="28">0</div><div class="lbl">Code Repos</div></div>
   </div>
 </div>
 
@@ -679,12 +684,14 @@ footer{border-top:1px solid var(--line-soft);background:var(--panel-2);padding:6
     <div class="sec-head reveal">
       <div class="sec-tag">Code · github.com/aashiquear</div>
       <h2>Open-source &amp; research code</h2>
-      <p>Original projects and the multiphysics frameworks I build on and contribute to.</p>
+      <p>Research code, Sandia open-source software, collaborative development, and applications. Private repositories are listed with a description, framework, and latest update, without a link.</p>
     </div>
     <div class="repo-tabs reveal" id="repoTabs">
       <button class="fbtn active" data-r="all">All</button>
-      <button class="fbtn" data-r="own">Owned</button>
-      <button class="fbtn" data-r="fork">Contributed / Forked</button>
+      <button class="fbtn" data-r="research">Research</button>
+      <button class="fbtn" data-r="collab">Sandia / Collaborative</button>
+      <button class="fbtn" data-r="app">Apps &amp; Tools</button>
+      <button class="fbtn" data-r="fork">Forks</button>
     </div>
     <div class="repo-grid" id="repoGrid"></div>
     <div class="gh-cta reveal">
@@ -804,19 +811,34 @@ const PUBS=[
 ];
 
 const REPOS=[
- {n:"mcp-moose-server",d:"An MCP (Model Context Protocol) server that exposes the MOOSE multiphysics framework as callable tools for LLM agents — the backbone of agentic simulation orchestration.",langs:[["Python","#3572A5"],["Jinja","#a52a2a"],["Docker","#384d54"]],k:"own",u:"2026-04-06"},
- {n:"nexus-chat",d:"Front-end client for a full-stack conversational AI application (Python / JavaScript / CSS).",langs:[["Python","#3572A5"],["JavaScript","#f1e05a"]],k:"own",u:"2026-05-30"},
- {n:"nexus-chat-server",d:"Back-end server powering the Nexus chat application, containerized for deployment.",langs:[["Python","#3572A5"],["Docker","#384d54"]],k:"own",u:"2026-05-30"},
- {n:"bengaltiger",d:"A MOOSE-based research application spanning crystal plasticity, thermal expansion, radiation-induced segregation, and oxidation.",langs:[["C++","#f34b7d"],["SWIG","#cc5500"],["TeX","#3D6117"]],k:"own",u:"2024-04-30",topics:"crystal-plasticity · thermal-expansion · segregation · oxidation"},
- {n:"arterial",d:"A C / C++ scientific-computing application.",langs:[["C++","#f34b7d"],["C","#555555"]],k:"own",u:"2026-05-20"},
- {n:"rocm-ml-server",d:"A machine-learning serving stack targeting AMD ROCm GPUs (Python / Docker).",langs:[["Python","#3572A5"],["HTML","#e34c26"],["Docker","#384d54"]],k:"own",u:"2026-04-29"},
- {n:"papoter",d:"A Kotlin / Android application.",langs:[["Kotlin","#A97BFF"]],k:"own",u:"2026-05-07"},
- {n:"cardinal",d:"A Kotlin / Android application.",langs:[["Kotlin","#A97BFF"]],k:"own",u:"2026-05-03"},
- {n:"playground",d:"Experiments, prototypes, and scratch work.",langs:[["Python","#3572A5"]],k:"own",u:"2023-05-11"},
- {n:"aashiquear.github.io",d:"Source for this personal website, hosted on GitHub Pages.",langs:[["HTML","#e34c26"]],k:"own",u:"2026-06-02"},
- {n:"moose",d:"The MOOSE multiphysics finite-element framework — the primary platform for my nuclear-materials and mechanics modeling.",langs:[["C++","#f34b7d"],["Python","#3572A5"]],k:"fork",u:"2026-04-07",fork:"idaholab/moose"},
- {n:"lion",d:"MOOSE-based application from the Tonks Research Lab for materials simulation.",langs:[["C++","#f34b7d"],["SWIG","#cc5500"]],k:"fork",u:"2022-07-06",fork:"tonkslab/lion"},
- {n:"dlaicourse",d:"Deep-learning coursework and notebooks (TensorFlow).",langs:[["Jupyter Notebook","#DA5B0B"],["Python","#3572A5"]],k:"fork",u:"2023-07-08",fork:"lmoroney/dlaicourse"}
+ {n:"AM-Orientation-Shift-TOOLKIT",k:"research",priv:true,url:"",d:"Layer-by-layer prediction of crystal rotation and misorientation of columnar FCC grains in laser powder-bed fusion. A genetic-algorithm-calibrated reduced-order surrogate captures the competition between crystal-slip-induced and thermal-gradient-induced lattice rotation, calibrated against 3D EBSD of a CoNi superalloy and IN718 (NIST AM Bench), and serves as the inter-layer orientation update for full-physics and kinetic Monte Carlo builds.",fw:"JAX \u00b7 MOOSE \u00b7 SPPARKS \u00b7 Exodus II \u00b7 Kokkos",langs:[["Python","#3572A5"]],u:"2026-10-17"},
+ {n:"misorientation-studies",k:"research",priv:true,url:"",d:"Calibration and measurement campaigns for process-induced misorientation in LPBF IN718 using the orientation-shift toolkit: full-volume surrogate builds compared with 3D serial-section EBSD, layer-wise texture and ODF analysis, and crystal-plasticity calibration.",fw:"JAX \u00b7 MOOSE \u00b7 NumPy / SciPy",langs:[["Python","#3572A5"]],u:"2026-10-02"},
+ {n:"pinnacle",k:"research",priv:true,url:"",d:"PINNACLE \u2014 a GPU-accelerated, differentiable framework that represents dislocation-density crystal plasticity and its two-way coupling to anisotropic phase-field damage with physics-informed neural networks, with interchangeable constitutive law, damage model, field solver, and coupling scheme.",fw:"PyTorch \u00b7 JAX \u00b7 PINNs",langs:[["Python","#3572A5"]],u:"2026-10-18"},
+ {n:"pinn-cp-pfd-benchmark",k:"research",priv:false,url:"",d:"Comparative benchmark of FEM, hybrid PINN+FEM, and neural-constitutive solvers for coupled crystal plasticity and phase-field damage, validated against published single-crystal Al2219 (intracrystalline void) and single-crystal nickel tensile cases.",fw:"MOOSE \u00b7 PINNACLE \u00b7 Exodus II",langs:[["Python","#3572A5"]],u:"2026-10-15"},
+ {n:"hexaform",k:"research",priv:false,url:"",d:"Conforming all-hexahedral mesh generation for cuboidal domains with analytic star-shaped inclusions, using cubed-sphere O-grid macroblocks; writes Exodus II and VTK, validates topology and element quality, and includes a browser-based inspection studio.",fw:"Exodus II \u00b7 VTK",langs:[["Python","#3572A5"],["JavaScript","#f1e05a"]],u:"2026-10-15"},
+ {n:"mcp-moose-server",k:"research",priv:false,url:"",d:"An MCP server that exposes the MOOSE multiphysics framework as callable tools for LLM agents \u2014 building and validating input decks, running simulations, inspecting outputs, and plotting results.",fw:"MCP \u00b7 MOOSE \u00b7 JSON-RPC 2.0",langs:[["Python","#3572A5"],["Docker","#384d54"]],u:"2026-04-06"},
+ {n:"statflow-mcp",k:"research",priv:true,url:"",d:"Statistical-analysis and deep-learning MCP server for LLM-assisted data science: method selection, hypothesis testing, regression, time series, design of experiments, A/B testing, and neural-network modeling.",fw:"MCP \u00b7 PyTorch \u00b7 TensorFlow \u00b7 Plotly",langs:[["Python","#3572A5"]],u:"2026-06-14"},
+ {n:"PromptPilot",k:"research",priv:true,url:"",d:"Tool-aware prompt prediction, rewriting, and inline completion delivered as an MCP server that makes other connected MCP tools easier to use.",fw:"MCP",langs:[["Python","#3572A5"]],u:"2026-06-06"},
+ {n:"bengaltiger",k:"research",priv:false,url:"",d:"A MOOSE-based research application spanning crystal plasticity, thermal expansion, radiation-induced segregation, and oxidation.",fw:"MOOSE \u00b7 crystal plasticity \u00b7 RIS \u00b7 oxidation",langs:[["C++","#f34b7d"]],u:"2024-04-30"},
+ {n:"sandialabs/roadrunner",k:"collab",priv:false,url:"https://github.com/sandialabs/roadrunner",d:"Sandia-copyrighted crystal plasticity and damage-evolution platform (author): dislocation-slip crystal plasticity, backstress for cyclic loading and fatigue, and a coupled phase-field damage model for mesoscale finite-element analysis of metals.",fw:"MOOSE \u00b7 PETSc",langs:[["C++","#f34b7d"]],u:"2026-01-14"},
+ {n:"sandialabs/GSH_EDT_AE",k:"collab",priv:false,url:"https://github.com/sandialabs/GSH_EDT_AE",d:"Sandia-copyrighted microstructure clustering for additively manufactured parts (author): generalized spherical harmonics and Euclidean distance transforms with a variational autoencoder to detect process-level anomalies from EBSD data. BSD-3-Clause.",fw:"Variational autoencoder \u00b7 EBSD \u00b7 GSH",langs:[["Jupyter Notebook","#DA5B0B"],["MATLAB","#e16737"]],u:"2025-08-04"},
+ {n:"trodger-snl/spparks",k:"collab",priv:false,url:"https://github.com/trodger-snl/spparks",d:"Collaborative development fork of the SPPARKS kinetic Monte Carlo code at Sandia, extending additive-manufacturing grain-growth simulation with Kokkos multi-device builds, finite-difference thermal coupling, and HDF5 output; integration target for the orientation-shift surrogate.",fw:"SPPARKS \u00b7 Kokkos \u00b7 HDF5 \u00b7 MPI",langs:[["C++","#f34b7d"],["Python","#3572A5"]],u:"2026-10-19"},
+ {n:"nexus-chat",k:"app",priv:false,url:"",d:"Modular agentic chatbot with multi-LLM support (frontier APIs and locally hosted open-weight models), MCP tool integration, and retrieval-augmented generation; deployable with Docker.",fw:"FastAPI \u00b7 React \u00b7 ChromaDB \u00b7 MCP",langs:[["Python","#3572A5"],["React (JSX)","#61dafb"]],u:"2026-05-30"},
+ {n:"nexus-chat-server",k:"app",priv:false,url:"",d:"Server deployment of Nexus Chat, packaged for self-hosted operation behind a private network.",fw:"FastAPI \u00b7 React \u00b7 Docker",langs:[["Python","#3572A5"],["React (JSX)","#61dafb"]],u:"2026-05-30"},
+ {n:"papoter",k:"app",priv:true,url:"",d:"Privacy-first Android chat client for local LLMs \u2014 fully on-device inference or a self-hosted model server \u2014 with streaming, tool use, image analysis, and document parsing; no data leaves the user's network.",fw:"llama.cpp \u00b7 Ollama \u00b7 Android",langs:[["Kotlin","#A97BFF"]],u:"2026-08-12"},
+ {n:"rocm-ml-server",k:"app",priv:false,url:"",d:"Self-hosted, multi-user JupyterHub on AMD ROCm with PyTorch for private, local machine-learning and deep-learning work.",fw:"ROCm \u00b7 PyTorch \u00b7 JupyterHub \u00b7 Docker",langs:[["Python","#3572A5"],["Shell","#89e051"]],u:"2026-07-13"},
+ {n:"ubuntu-server",k:"app",priv:false,url:"",d:"Browser-based Ubuntu workspace for the local network: file browser, terminal, web VS Code, and remote desktop, signed in with system accounts.",fw:"Node.js \u00b7 code-server \u00b7 XRDP",langs:[["JavaScript","#f1e05a"],["Shell","#89e051"]],u:"2026-07-26"},
+ {n:"gdrive-sync",k:"app",priv:false,url:"",d:"On-demand Google Drive sync for Ubuntu with placeholder files, two-way background sync, a GTK interface, CLI, and systemd integration.",fw:"GTK \u00b7 Drive API \u00b7 systemd",langs:[["Python","#3572A5"],["Shell","#89e051"]],u:"2026-07-28"},
+ {n:"cardinal",k:"app",priv:false,url:"",d:"Open-source Android navigation app with Android Auto support, built on OpenStreetMap data and Valhalla routing.",fw:"Android \u00b7 Android Auto \u00b7 Valhalla",langs:[["Kotlin","#A97BFF"]],u:"2026-05-03"},
+ {n:"LaserForge",k:"app",priv:false,url:"",d:"Native Android LPBF metal 3D-printing simulator game: recoater, powder bed, and adjustable laser power, width, layer thickness, and beam shape.",fw:"OpenGL ES 2.0 \u00b7 Android",langs:[["Kotlin","#A97BFF"]],u:"2026-06-06"},
+ {n:"arterial",k:"app",priv:true,url:"",d:"3D Android game for designing road networks and watching simulated traffic flow through them.",fw:"Unity 6 \u00b7 DOTS/ECS \u00b7 Android",langs:[["C#","#178600"],["C++","#f34b7d"]],u:"2026-06-19"},
+ {n:"catricket",k:"app",priv:true,url:"",d:"Native Android cricket game with cats as players, custom Canvas rendering, and multiple match formats.",fw:"Android \u00b7 Canvas",langs:[["Kotlin","#A97BFF"]],u:"2026-07-08"},
+ {n:"sandblitz",k:"app",priv:true,url:"",d:"Casual Android block game published to Google Play.",fw:"Android",langs:[["Kotlin","#A97BFF"]],u:"2026-08-12"},
+ {n:"aashiquear.github.io",k:"app",priv:false,url:"",d:"Source for this personal website, hosted on GitHub Pages.",fw:"GitHub Pages",langs:[["HTML","#e34c26"],["JavaScript","#f1e05a"]],u:"2026-10-19"},
+ {n:"playground",k:"app",priv:false,url:"",d:"Experiments, prototypes, and scratch work.",fw:"",langs:[["Python","#3572A5"]],u:"2023-05-11"},
+ {n:"moose",k:"fork",priv:false,url:"",d:"The MOOSE multiphysics finite-element framework \u2014 the primary platform for my nuclear-materials and mechanics modeling.",fw:"forked from idaholab/moose",langs:[["C++","#f34b7d"],["Python","#3572A5"]],u:"2026-10-07"},
+ {n:"lion",k:"fork",priv:false,url:"",d:"MOOSE-based application from the Tonks Research Lab for materials simulation.",fw:"forked from tonkslab/lion",langs:[["C++","#f34b7d"]],u:"2022-07-06"},
+ {n:"dlaicourse",k:"fork",priv:false,url:"",d:"Deep-learning coursework and notebooks (TensorFlow).",fw:"forked from lmoroney/dlaicourse",langs:[["Jupyter Notebook","#DA5B0B"],["Python","#3572A5"]],u:"2023-07-08"}
 ];
 
 /* ---------- render publications ---------- */
@@ -855,22 +877,26 @@ document.getElementById('pubSearch').addEventListener('input',e=>{curQ=e.target.
 
 /* ---------- render repos ---------- */
 const repoGrid=document.getElementById('repoGrid');
+const RK={research:'Research',collab:'Sandia / Collab',app:'App / Tool',fork:'Fork'};
+function repoHref(r){if(r.priv)return '';return r.url||`https://github.com/aashiquear/${r.n}`;}
 function renderRepos(list){
-  repoGrid.innerHTML=list.map(r=>`
-    <a class="repo" data-k="${r.k}" href="https://github.com/aashiquear/${r.n}" target="_blank" rel="noopener">
+  repoGrid.innerHTML=list.map(r=>{
+    const h=repoHref(r),tag=h?'a':'div';
+    const attrs=h?`href="${h}" target="_blank" rel="noopener"`:`title="Private repository — available on request"`;
+    return `<${tag} class="repo${h?'':' priv'}" data-k="${r.k}" ${attrs}>
       <div class="repo-top">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">${r.k==='fork'?'<circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="8" r="2.5"/><path d="M6 8.5v7M18 10.5c0 3-6 1-6 5"/>':'<path d="M6 3v12M6 15a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM18 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 9c0 6-12 1-12 6"/>'}</svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">${r.priv?'<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>':r.k==='fork'?'<circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="8" r="2.5"/><path d="M6 8.5v7M18 10.5c0 3-6 1-6 5"/>':'<path d="M6 3v12M6 15a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM18 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 9c0 6-12 1-12 6"/>'}</svg>
         <h3>${r.n}</h3>
-        <span class="rk ${r.k}">${r.k==='fork'?'Fork':'Owned'}</span>
+        <span class="rk ${r.k}">${RK[r.k]}</span>
       </div>
       <p class="rd">${r.d}</p>
-      ${r.topics?`<div class="rfork mono">${r.topics}</div>`:''}
-      ${r.fork?`<div class="rfork">forked from <b>${r.fork}</b></div>`:''}
+      ${r.fw?`<div class="rfork">${r.k==='fork'?r.fw.replace(/^forked from (.*)$/,'forked from <b>$1</b>'):'<b>Framework:</b> '+r.fw}</div>`:''}
       <div class="repo-foot">
-        ${r.langs.map(l=>`<span class="lang"><span class="dot" style="background:${l[1]}"></span>${l[0]}</span>`).slice(0,2).join('')}
+        ${r.langs.map(l=>`<span class="lang"><span class="dot" style="background:${l[1]}"></span>${l[0]}</span>`).join('')}
+        ${r.priv?'<span class="lang priv-tag">🔒 Private</span>':''}
         <span class="updated">↻ ${fmtDate(r.u)}</span>
       </div>
-    </a>`).join('');
+    </${tag}>`;}).join('');
 }
 renderRepos(REPOS);
 document.getElementById('repoTabs').addEventListener('click',e=>{
